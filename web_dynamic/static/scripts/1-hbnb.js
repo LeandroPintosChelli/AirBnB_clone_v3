@@ -1,12 +1,23 @@
-window.onload = function (){
-    const checkbox = document.querySelector('#checkbox')
-    checkbox.addEventListener('interesting changes', function() {
-        let check_list = [];
-        if (checkbox.checked) {
-            check_list.appendChild(amenities.id);
-        } else if (!checkbox.checked) {
-            check_list.removeChild(amenities.id);
-        }
+// Script that is executed only when DOM is loaded with jQuery
+
+let checked_box = {};
+$(document).ready(function () {
+    $('input:checkbox').change(function () {
+	if ($(this).is(':checked_box')) {
+	    checked_box[$(this).data('id')] = $(this).data('name');
+	}
+	else {
+	    delete checked_box[$(this).data('id')];
+	}
+	$('div.amenities h4').html(function () {
+	    let amenities = [];
+	    Object.keys(checked_box).forEach(function (key) {
+		amenities.push(checked_box[key]);
+	    });
+	    if (amenities.length === 0) {
+		return ('&nbsp');
+	    }
+	    return (amenities.join(', '));
+	});
     });
-}
-console.log(checkbox)
+});
